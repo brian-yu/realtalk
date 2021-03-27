@@ -3,3 +3,11 @@
   grid-template-columns: 1fr 1fr 1fr;
   row-gap: 20px;
 }
+
+.videoWrapper {
+  width: 100%;
+  overflow:hidden;
+  display:block;
+  height: 240px;
+  text-align: center;
+}

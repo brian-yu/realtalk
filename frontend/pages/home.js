@@ -18,16 +18,19 @@ export default function Home() {
         <div className={styles.cardGrid}>
           {people.map((person) => {
             return (
+              <Link href={`/chat/${person.id}`}>
               <Card style={{ width: "18rem" }}>
-                <video
-                  src={person.video}
-                  width="256"
-                  height="256"
-                  no-controls
-                  loop
-                  autoPlay={true}
-                  muted
-                />
+                <div className={styles.videoWrapper}>
+                  <video
+                    src={person.video}
+                    width="256"
+                    height="256"
+                    no-controls
+                    loop
+                    autoPlay={true}
+                    muted
+                  />
+                </div>
                 <Card.Body>
                   <Card.Title>{person.name}</Card.Title>
                   <Card.Text>{person.bio}</Card.Text>
@@ -38,6 +41,7 @@ export default function Home() {
                   </Link>
                 </Card.Body>
               </Card>
+              </Link>
             );
           })}
         </div>

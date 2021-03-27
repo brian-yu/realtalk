@@ -6,7 +6,7 @@ import { Button, Container, FormControl, InputGroup } from "react-bootstrap";
 import { peopleMap } from "../../lib/people";
 import styles from "../../styles/Chat.module.css";
 
-const BACKEND_HOST = "http://localhost:5000";
+const BACKEND_HOST = "https://tender-rat-46.loca.lt";
 
 function Message({ message }) {
   if (message === "") {
@@ -103,14 +103,18 @@ export default function Chat() {
     if (sendDisabled) {
       return;
     }
-    
+
     setSendDisabled(true);
     postData(`${BACKEND_HOST}/chat`, {
       message: message,
       person: person.name,
       prompt: prompt,
+      personId: personId,
     }).then((data) => {
       setPrompt(data.prompt);
+      console.log(data.video)
+      videoRef.current.src=data.video
+      videoRef.current.loop=false
       setMessage("");
       setSendDisabled(false);
     });
@@ -143,15 +147,18 @@ export default function Chat() {
           </InputGroup>
         </div>
         <div>
-          <video
-            ref={videoRef}
-            src={videoSrc}
-            // width="512"
-            // height="512"
-            no-controls
-            loop
-            autoPlay={true}
-          />
+          <div className={styles.videoWrapper}>
+            <video
+              className={styles.video}
+              ref={videoRef}
+              src={videoSrc}
+              width="512"
+              height="512"
+              no-controls
+              loop
+              autoPlay={true}
+            />
+          </div>
         </div>
       </div>
     </Container>

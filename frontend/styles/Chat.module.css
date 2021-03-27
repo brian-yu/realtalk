@@ -8,3 +8,10 @@
     max-height: 450px;
     overflow-y: scroll;
 }
+
+.videoWrapper {
+    width: 100%;
+    overflow:hidden;
+    display:block;
+    height: 480px;
+}
