@@ -21,6 +21,13 @@ export const people = [
       "American politician and attorney who served as the 44th president of the United States",
   },
   {
+    name: "Martin Luther King Jr.",
+    id: "king",
+    video: "/portraits/king.mp4",
+    bio:
+      "American minister and activist who became the most visible spokesperson and leader in the American civil rights movement",
+  },
+  {
     name: "Kamala Harris",
     id: "harris",
     video: "/portraits/harris.mp4",
