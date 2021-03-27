@@ -80,6 +80,7 @@ export default function Chat() {
   const [prompt, setPrompt] = useState(null);
   const [videoSrc, setVideoSrc] = useState(null);
   const [message, setMessage] = useState("");
+  const [sendDisabled, setSendDisabled] = useState(false);
 
   const videoRef = useRef(null);
 
@@ -99,6 +100,11 @@ export default function Chat() {
   }
 
   const sendMessage = () => {
+    if (sendDisabled) {
+      return;
+    }
+    
+    setSendDisabled(true);
     postData(`${BACKEND_HOST}/chat`, {
       message: message,
       person: person.name,
@@ -106,6 +112,7 @@ export default function Chat() {
     }).then((data) => {
       setPrompt(data.prompt);
       setMessage("");
+      setSendDisabled(false);
     });
   };
 
@@ -128,9 +135,10 @@ export default function Chat() {
               aria-label="Message"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              disabled={sendDisabled}
             />
             <InputGroup.Append>
-              <Button onClick={sendMessage}>Send</Button>
+              <Button onClick={sendMessage} disabled={sendDisabled}>Send</Button>
             </InputGroup.Append>
           </InputGroup>
         </div>
