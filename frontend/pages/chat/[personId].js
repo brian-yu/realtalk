@@ -1,7 +1,13 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
-import { Button, Container, FormControl, InputGroup } from "react-bootstrap";
+import {
+  Button,
+  Container,
+  FormControl,
+  InputGroup,
+  Spinner,
+} from "react-bootstrap";
 
 import { peopleMap } from "../../lib/people";
 import styles from "../../styles/Chat.module.css";
@@ -82,6 +88,8 @@ export default function Chat() {
   const [message, setMessage] = useState("");
   const [sendDisabled, setSendDisabled] = useState(false);
 
+  const loading = sendDisabled;
+
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -112,9 +120,14 @@ export default function Chat() {
       personId: personId,
     }).then((data) => {
       setPrompt(data.prompt);
-      console.log(data.video)
-      videoRef.current.src=data.video
-      videoRef.current.loop=false
+      console.log(data.video);
+      videoRef.current.src = data.video;
+      videoRef.current.loop = false;
+
+      videoRef.current.addEventListener("ended", (e) => {
+        e.target.src = person.video;
+        e.target.loop = true;
+      });
       setMessage("");
       setSendDisabled(false);
     });
@@ -142,11 +155,13 @@ export default function Chat() {
               disabled={sendDisabled}
             />
             <InputGroup.Append>
-              <Button onClick={sendMessage} disabled={sendDisabled}>Send</Button>
+              <Button onClick={sendMessage} disabled={sendDisabled}>
+                Send
+              </Button>
             </InputGroup.Append>
           </InputGroup>
         </div>
-        <div>
+        <div className={styles.videoColumn}>
           <div className={styles.videoWrapper}>
             <video
               className={styles.video}
@@ -159,6 +174,14 @@ export default function Chat() {
               autoPlay={true}
             />
           </div>
+          {loading ? (
+            <div className={styles.loadingContainer}>
+              <Spinner animation="border"/>
+              <span>
+                <strong className={styles.loadingText}>{person.name} is thinking...</strong>
+              </span>
+            </div>
+          ) : null}
         </div>
       </div>
     </Container>
