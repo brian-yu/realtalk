@@ -5,8 +5,12 @@
 }
 
 .log {
-    max-height: 450px;
+    height: 450px;
     overflow-y: scroll;
+}
+
+.video {
+    border-radius: 8px;
 }
 
 .videoWrapper {
@@ -31,3 +35,10 @@
 }
 
 .loadingText {}
+
+.chatColumn {
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 8px;
+    padding: 10px 10px 0 10px;
+}

@@ -12,7 +12,7 @@ import {
 import { peopleMap } from "../../lib/people";
 import styles from "../../styles/Chat.module.css";
 
-const BACKEND_HOST = "https://tender-rat-46.loca.lt";
+const BACKEND_HOST = "https://cold-impala-32.loca.lt";
 
 function Message({ message }) {
   if (message === "") {
@@ -144,22 +144,24 @@ export default function Chat() {
 
       <div className={styles.container}>
         <div>
-          <Log prompt={prompt} />
-
-          <InputGroup className="mb-3">
-            <FormControl
-              placeholder="Message"
-              aria-label="Message"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              disabled={sendDisabled}
-            />
-            <InputGroup.Append>
-              <Button onClick={sendMessage} disabled={sendDisabled}>
-                Send
-              </Button>
-            </InputGroup.Append>
-          </InputGroup>
+          <div className={styles.chatColumn}>
+            <Log prompt={prompt} />
+            <InputGroup className="mb-3">
+              <FormControl
+                placeholder="Message"
+                aria-label="Message"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyPress={(e) => (e.key === "Enter" ? sendMessage() : null)}
+                disabled={sendDisabled}
+              />
+              <InputGroup.Append>
+                <Button onClick={sendMessage} disabled={sendDisabled}>
+                  Send
+                </Button>
+              </InputGroup.Append>
+            </InputGroup>
+          </div>
         </div>
         <div className={styles.videoColumn}>
           <div className={styles.videoWrapper}>
@@ -176,9 +178,11 @@ export default function Chat() {
           </div>
           {loading ? (
             <div className={styles.loadingContainer}>
-              <Spinner animation="border"/>
+              <Spinner animation="border" />
               <span>
-                <strong className={styles.loadingText}>{person.name} is thinking...</strong>
+                <strong className={styles.loadingText}>
+                  {person.name} is thinking...
+                </strong>
               </span>
             </div>
           ) : null}

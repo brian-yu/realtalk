@@ -34,6 +34,19 @@ export const people = [
     bio:
       "American politician and attorney serving as the 49th vice president of the United States",
   },
+  {
+    name: "Rosalind Franklin",
+    id: "franklin",
+    video: "/portraits/franklin.mp4",
+    bio:
+      "English chemist and X-ray crystallographer whose work was central to the understanding of the molecular structures of DNA, RNA, viruses, coal, and graphite.",
+  },
+  {
+    name: "Albert Einstein",
+    id: "einstein",
+    video: "/portraits/einstein.mp4",
+    bio: "German-born theoretical physicist who developed the theory of relativity and is one of the greatest physicists of all time."
+  }
 ];
 
 export const peopleMap = Object.fromEntries(people.map((obj) => [obj.id, obj]));
