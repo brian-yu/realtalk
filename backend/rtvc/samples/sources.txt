@@ -1,0 +1,9 @@
+resample to 16000 Hz
+split stereo to mono
+remove noise
+boost bass if you hear "crackly" higher pitches in generated
+
+obama: https://www.youtube.com/watch?v=qx7CFmgLQKs
+king: https://www.youtube.com/watch?v=5r98tT0j1a0
+harris: https://www.youtube.com/watch?v=o1tAWqutoS4
+feynman: https://www.youtube.com/watch?v=ipRvjS7q1DI
