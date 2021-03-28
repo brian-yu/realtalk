@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import {
   Button,
   Container,
+  Form,
   FormControl,
   InputGroup,
   Spinner,
@@ -87,6 +88,7 @@ export default function Chat() {
   const [videoSrc, setVideoSrc] = useState(null);
   const [message, setMessage] = useState("");
   const [sendDisabled, setSendDisabled] = useState(false);
+  const [voiceCloningEnabled, setVoiceCloningEnabled] = useState(true);
 
   const loading = sendDisabled;
 
@@ -118,6 +120,7 @@ export default function Chat() {
       person: person.name,
       prompt: prompt,
       personId: personId,
+      voiceCloningEnabled: voiceCloningEnabled,
     }).then((data) => {
       setPrompt(data.prompt);
       console.log(data.video);
@@ -171,11 +174,16 @@ export default function Chat() {
               src={videoSrc}
               width="512"
               height="512"
-              no-controls
               loop
               autoPlay={true}
             />
           </div>
+          <Form.Switch
+            label="Enable voice cloning"
+            id="voice-cloning-switch"
+            checked={voiceCloningEnabled}
+            onChange={(e) => setVoiceCloningEnabled(e.target.checked)}
+          />
           {loading ? (
             <div className={styles.loadingContainer}>
               <Spinner animation="border" />

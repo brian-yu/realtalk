@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button, Card, Container } from "react-bootstrap";
 import styles from "../styles/Home.module.css";
 
-import {people} from "../lib/people";
+import { people } from "../lib/people";
 
 export default function Home() {
   return (
@@ -16,31 +16,30 @@ export default function Home() {
       <Container>
         <h1>Home</h1>
         <div className={styles.cardGrid}>
-          {people.map((person) => {
+          {people.map((person, idx) => {
             return (
-              <Link href={`/chat/${person.id}`}>
-              <Card style={{ width: "18rem" }}>
-                <div className={styles.videoWrapper}>
-                  <video
-                    src={person.video}
-                    width="256"
-                    height="256"
-                    no-controls
-                    loop
-                    autoPlay={true}
-                    muted
-                  />
-                </div>
-                <Card.Body>
-                  <Card.Title>{person.name}</Card.Title>
-                  <Card.Text>{person.bio}</Card.Text>
-                  <Link href={`/chat/${person.id}`}>
-                    <Button variant="primary">
-                      Chat with {person.name.split(" ")[0]}
-                    </Button>
-                  </Link>
-                </Card.Body>
-              </Card>
+              <Link href={`/chat/${person.id}`} key={idx}>
+                <Card style={{ width: "18rem" }}>
+                  <div className={styles.videoWrapper}>
+                    <video
+                      src={person.video}
+                      width="256"
+                      height="256"
+                      loop
+                      autoPlay={true}
+                      muted
+                    />
+                  </div>
+                  <Card.Body>
+                    <Card.Title>{person.name}</Card.Title>
+                    <Card.Text>{person.bio}</Card.Text>
+                    <Link href={`/chat/${person.id}`}>
+                      <Button variant="primary">
+                        Chat with {person.name.split(" ")[0]}
+                      </Button>
+                    </Link>
+                  </Card.Body>
+                </Card>
               </Link>
             );
           })}

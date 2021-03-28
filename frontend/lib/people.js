@@ -39,13 +39,13 @@ export const people = [
     id: "franklin",
     video: "/portraits/franklin.mp4",
     bio:
-      "English chemist and X-ray crystallographer whose work was central to the understanding of the molecular structures of DNA, RNA, viruses, coal, and graphite.",
+      "English chemist whose work was central to the understanding of the molecular structures of DNA, RNA, and graphite",
   },
   {
     name: "Albert Einstein",
     id: "einstein",
     video: "/portraits/einstein.mp4",
-    bio: "German-born theoretical physicist who developed the theory of relativity and is one of the greatest physicists of all time."
+    bio: "German-born theoretical physicist who developed the theory of relativity"
   }
 ];
 
