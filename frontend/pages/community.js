@@ -26,7 +26,7 @@ export default function Community() {
       </Head>
 
       <Container>
-        <h1>Home</h1>
+        <h1>Community</h1>
         <div className={styles.cardGrid}>
           {profiles.map((person, idx) => {
             return (

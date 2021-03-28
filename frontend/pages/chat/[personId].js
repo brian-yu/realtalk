@@ -71,17 +71,17 @@ export default function Chat() {
       return;
     }
     fetch(`${BACKEND_HOST}/profile/${personId}`)
-      .then(response => response.json())
-      .then(data => {
+      .then((response) => response.json())
+      .then((data) => {
         setPerson({
           name: data.name,
           id: personId,
           video: data.video_url,
           bio: data.bio,
           voiceCloningAvailable: false,
-        })
+        });
       });
-  }, [personId])
+  }, [personId]);
 
   const [person, setPerson] = useState(peopleMap[personId]);
 
@@ -95,14 +95,17 @@ export default function Chat() {
 
   const videoRef = useRef(null);
 
-  console.log(person)
+  // console.log(person)
 
   const voiceCloningPopover = (
     <Popover id="popover-basic">
       <Popover.Title as="h3">Voice Cloning</Popover.Title>
       <Popover.Content>
-        {person ?
-        (person.voiceCloningAvailable ? "Voice cloning creates more realistic audio, but is much slower. ": `Voice cloning is disabled for ${person.name}`) : "Voice cloning is disabled"}
+        {person
+          ? person.voiceCloningAvailable
+            ? "Voice cloning creates more realistic audio, but is much slower. "
+            : `Voice cloning is disabled for ${person.name}`
+          : "Voice cloning is disabled"}
       </Popover.Content>
     </Popover>
   );
@@ -194,7 +197,11 @@ export default function Chat() {
           </div>
           <OverlayTrigger placement="bottom" overlay={voiceCloningPopover}>
             <Form.Switch
-              label={person.voiceCloningAvailable ? "Enable voice cloning" : `Voice cloning is not available`}
+              label={
+                person.voiceCloningAvailable
+                  ? "Enable voice cloning"
+                  : `Voice cloning is not available`
+              }
               id="voice-cloning-switch"
               checked={voiceCloningEnabled}
               onChange={(e) => setVoiceCloningEnabled(e.target.checked)}

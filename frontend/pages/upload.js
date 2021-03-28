@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import Head from "next/head";
 import { useDropzone } from "react-dropzone";
-import { Alert, Button, Container, Form } from "react-bootstrap";
+import { Alert, Button, Container, Form, Spinner } from "react-bootstrap";
 
 import { BACKEND_HOST } from "../lib/constants";
 import { postData, postFormData, toBase64 } from "../lib/util";
@@ -49,7 +49,6 @@ function StyledDropzone({ setFile }) {
     onDrop: (acceptedFiles) => {
       acceptedFiles.forEach((file) => {
         if (file) {
-          console.log(file);
           setFile(file);
         }
       });
@@ -70,8 +69,6 @@ function StyledDropzone({ setFile }) {
     <p key={file.path}>{file.path}</p>
   ));
 
-  console.log(acceptedFiles);
-
   return (
     <div className="container">
       <div {...getRootProps({ style })}>
@@ -89,24 +86,37 @@ function StyledDropzone({ setFile }) {
 
 export default function Upload() {
   const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
   const [name, setName] = useState(null);
   const [bio, setBio] = useState(null);
   const [file, setFile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const uploadData = () => {
     setError(null);
+    setSuccess(null);
     if (!name || !bio || !file) {
       setError("Please fill out all fields.");
       return;
     }
 
     const formData = new FormData();
-    formData.append('name', name);
-    formData.append('bio', bio);
-    formData.append('image', file);
+    formData.append("name", name);
+    formData.append("bio", bio);
+    formData.append("image", file);
 
-      postFormData(`${BACKEND_HOST}/upload`, formData).then((data) => {
-        console.log(data);
+    setLoading(true);
+    postFormData(`${BACKEND_HOST}/upload`, formData)
+      .then((data) => {
+        console.log("Success:", data);
+        setLoading(false);
+        setSuccess(true);
+        setError(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        setError("There was a problem uploading your profile.");
       });
 
     // toBase64(file).then((encodedImage) => {
@@ -131,6 +141,11 @@ export default function Upload() {
       <Container>
         <h1>Upload</h1>
         {!!error ? <Alert variant="danger">{error}</Alert> : null}
+        {!!success ? (
+          <Alert variant="success">
+            Your profile was uploaded successfully!
+          </Alert>
+        ) : null}
         <Form>
           <Form.Label>Name</Form.Label>
           <Form.Control
@@ -141,6 +156,8 @@ export default function Upload() {
           />
           <Form.Label>Bio</Form.Label>
           <Form.Control
+            as="textarea"
+            rows={3}
             type="text"
             placeholder="an X who did Y"
             value={bio}
@@ -149,7 +166,12 @@ export default function Upload() {
           <Form.Label>Portrait Photo</Form.Label>
           <StyledDropzone setFile={setFile} />
           <br />
-          <Button onClick={uploadData}>Upload</Button>
+          <Button onClick={uploadData} disabled={loading}>
+            Upload
+          </Button>
+          {loading ? (
+              <Spinner animation="border" />
+          ) : null}
         </Form>
       </Container>
     </div>
