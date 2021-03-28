@@ -77,7 +77,15 @@ export const people = [
     video: "/portraits/granger.mp4",
     bio:
       "best friend of Harry Potter's who often uses her quick wit, deft recall, and encyclopaedic knowledge to lend aid in dire situations",
-    voiceCloningAvailable: false,
+    voiceCloningAvailable: true,
+  },
+  {
+    name: "James Bond",
+    id: "bond",
+    video: "/portraits/bond.mp4",
+    bio:
+      "Secret Intelligence Service agent, code number 007, residing in London but active internationally",
+    voiceCloningAvailable: true,
   },
 ];
 
