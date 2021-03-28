@@ -16,7 +16,7 @@ from audioread.exceptions import NoBackendError
 import pickle
 
 if __name__ == '__main__':
-    person_name = "obama"
+    person_name = "bond"
     in_fpath = Path(f"samples/{person_name}.mp3")
     out_fpath = Path(f"embeds/{person_name}.embed")
 

@@ -7,3 +7,4 @@ obama: https://www.youtube.com/watch?v=qx7CFmgLQKs
 king: https://www.youtube.com/watch?v=5r98tT0j1a0
 harris: https://www.youtube.com/watch?v=o1tAWqutoS4
 feynman: https://www.youtube.com/watch?v=ipRvjS7q1DI
+emma watson: https://www.youtube.com/watch?v=k1yPVhOLQ5w
