@@ -33,8 +33,13 @@ export default function AppNavbar() {
             </Link>
           </Nav.Item>
           <Nav.Item>
-            <Link href="/about">
-              <Nav.Link href="/about">About</Nav.Link>
+            <Link href="/community">
+              <Nav.Link href="/community">Community</Nav.Link>
+            </Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Link href="/upload">
+              <Nav.Link href="/upload">Upload</Nav.Link>
             </Link>
           </Nav.Item>
         </Nav>
