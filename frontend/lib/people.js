@@ -1,10 +1,9 @@
 export const people = [
   {
-    name: "Richard Feynman",
-    id: "feynman",
-    video: "/portraits/feynman.mp4",
-    bio:
-      "American theoretical physicist known for his work in quantum mechanics and quantum electrodynamics",
+    name: "Albert Einstein",
+    id: "einstein",
+    video: "/portraits/einstein.mp4",
+    bio: "German-born theoretical physicist who developed the theory of relativity"
   },
   {
     name: "Marie Curie",
@@ -35,6 +34,13 @@ export const people = [
       "American politician and attorney serving as the 49th vice president of the United States",
   },
   {
+    name: "Richard Feynman",
+    id: "feynman",
+    video: "/portraits/feynman.mp4",
+    bio:
+      "American theoretical physicist known for his work in quantum mechanics and quantum electrodynamics",
+  },
+  {
     name: "Rosalind Franklin",
     id: "franklin",
     video: "/portraits/franklin.mp4",
@@ -42,11 +48,19 @@ export const people = [
       "English chemist whose work was central to the understanding of the molecular structures of DNA, RNA, and graphite",
   },
   {
-    name: "Albert Einstein",
-    id: "einstein",
-    video: "/portraits/einstein.mp4",
-    bio: "German-born theoretical physicist who developed the theory of relativity"
-  }
+    name: "John Lennon",
+    id: "lennon",
+    video: "/portraits/lennon.mp4",
+    bio:
+      "English singer, songwriter, musician and peace activist who achieved worldwide fame as the founder, co-lead vocalist, and rhythm guitarist of the Beatles",
+  },
+  {
+    name: "Amelia Earhart",
+    id: "earhart",
+    video: "/portraits/earhart.mp4",
+    bio:
+      "American aviation pioneer and author who was the first female aviator to fly solo across the Atlantic Ocean",
+  },
 ];
 
 export const peopleMap = Object.fromEntries(people.map((obj) => [obj.id, obj]));

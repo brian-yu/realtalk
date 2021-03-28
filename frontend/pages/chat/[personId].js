@@ -7,6 +7,8 @@ import {
   Form,
   FormControl,
   InputGroup,
+  OverlayTrigger,
+  Popover,
   Spinner,
 } from "react-bootstrap";
 
@@ -88,18 +90,27 @@ export default function Chat() {
   const [videoSrc, setVideoSrc] = useState(null);
   const [message, setMessage] = useState("");
   const [sendDisabled, setSendDisabled] = useState(false);
-  const [voiceCloningEnabled, setVoiceCloningEnabled] = useState(true);
+  const [voiceCloningEnabled, setVoiceCloningEnabled] = useState(false);
 
   const loading = sendDisabled;
 
   const videoRef = useRef(null);
+
+  const voiceCloningPopover = (
+    <Popover id="popover-basic">
+      <Popover.Title as="h3">Voice Cloning</Popover.Title>
+      <Popover.Content>
+        Voice cloning creates more realistic audio, but is much slower.
+      </Popover.Content>
+    </Popover>
+  );
 
   useEffect(() => {
     if (!person) {
       return;
     }
     setPrompt(
-      `The following is a conversation between a stranger and ${person.name}.\n\nStranger: Hello, who are you?\n${person.name}: I am ${person.name}.`
+      `The following is a conversation between a stranger and ${person.name}.\n\nStranger: Hello, who are you?\n${person.name}: I am ${person.name}, ${person.bio}.`
     );
 
     setVideoSrc(person.video);
@@ -178,12 +189,14 @@ export default function Chat() {
               autoPlay={true}
             />
           </div>
-          <Form.Switch
-            label="Enable voice cloning"
-            id="voice-cloning-switch"
-            checked={voiceCloningEnabled}
-            onChange={(e) => setVoiceCloningEnabled(e.target.checked)}
-          />
+          <OverlayTrigger placement="bottom" overlay={voiceCloningPopover}>
+            <Form.Switch
+              label="Enable voice cloning"
+              id="voice-cloning-switch"
+              checked={voiceCloningEnabled}
+              onChange={(e) => setVoiceCloningEnabled(e.target.checked)}
+            />
+          </OverlayTrigger>
           {loading ? (
             <div className={styles.loadingContainer}>
               <Spinner animation="border" />

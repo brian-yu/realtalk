@@ -17,10 +17,6 @@ export default function Home() {
 
         <SignIn redirectPath="/home"></SignIn>
       </main>
-
-      <footer className={styles.footer}>
-        RealTalk
-      </footer>
     </div>
   );
 }

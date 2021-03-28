@@ -33,9 +33,12 @@ export default function AppNavbar() {
         </Nav>
         <Nav className="ml-auto">
           <Nav.Item>
-            <Link href="/profile">
+            {/* <Link href="/profile">
               <Nav.Link href="/profile">Hi, {name}!</Nav.Link>
-            </Link>
+            </Link> */}
+            {/* <Nav.Link disabled>Hi, {name}!</Nav.Link> */}
+            <p className="text-center mt-2 mb-2 mr-2">Hi, {name}!</p>
+            {/* <p>Hi, {name}!</p> */}
           </Nav.Item>
           <Nav.Item>
             <Button
