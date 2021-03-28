@@ -71,6 +71,14 @@ export const people = [
       "American aviation pioneer and author who was the first female aviator to fly solo across the Atlantic Ocean",
     voiceCloningAvailable: false,
   },
+  {
+    name: "Hermione Granger",
+    id: "granger",
+    video: "/portraits/granger.mp4",
+    bio:
+      "best friend of Harry Potter's who often uses her quick wit, deft recall, and encyclopaedic knowledge to lend aid in dire situations",
+    voiceCloningAvailable: false,
+  },
 ];
 
 export const peopleMap = Object.fromEntries(people.map((obj) => [obj.id, obj]));
