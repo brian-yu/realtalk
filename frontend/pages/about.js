@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { Container } from "react-bootstrap";
 import styles from "../styles/Home.module.css";
 
 export default function About() {
@@ -9,9 +10,10 @@ export default function About() {
         <link rel="icon" href="/logo.svg" />
       </Head>
 
-      <main className={styles.main}>
-          About
-      </main>
+      <Container>
+        <img width="200px" src="/logo.png"/>
+        <h1>About RealTalk</h1>
+      </Container>
     </div>
   );
 }

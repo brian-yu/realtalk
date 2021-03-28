@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <h1 className={styles.title}>Welcome to RealTalk!</h1>
+        <img width="200px" src="/logo.png"/><h1 className={styles.title}>Welcome to RealTalk.</h1>
 
         <p className={styles.description}>Get started by signing in.</p>
 
