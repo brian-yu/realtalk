@@ -96,11 +96,14 @@ export default function Chat() {
 
   const videoRef = useRef(null);
 
+  console.log(person)
+
   const voiceCloningPopover = (
     <Popover id="popover-basic">
       <Popover.Title as="h3">Voice Cloning</Popover.Title>
       <Popover.Content>
-        Voice cloning creates more realistic audio, but is much slower.
+        {person ?
+        (person.voiceCloningAvailable ? "Voice cloning creates more realistic audio, but is much slower. ": `Voice cloning is disabled for ${person.name}`) : "Voice cloning is disabled"}
       </Popover.Content>
     </Popover>
   );
@@ -191,10 +194,11 @@ export default function Chat() {
           </div>
           <OverlayTrigger placement="bottom" overlay={voiceCloningPopover}>
             <Form.Switch
-              label="Enable voice cloning"
+              label={person.voiceCloningAvailable ? "Enable voice cloning" : `Voice cloning is not available`}
               id="voice-cloning-switch"
               checked={voiceCloningEnabled}
               onChange={(e) => setVoiceCloningEnabled(e.target.checked)}
+              disabled={!person.voiceCloningAvailable}
             />
           </OverlayTrigger>
           {loading ? (
