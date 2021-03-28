@@ -10,7 +10,7 @@ export default function Home() {
     <div className={styles.container}>
       <Head>
         <title>RealTalk | Home</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.svg" />
       </Head>
 
       <Container>

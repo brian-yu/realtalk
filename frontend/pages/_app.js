@@ -6,12 +6,13 @@
 
 // export default MyApp
 
-import '../styles/globals.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "../styles/globals.css";
+import "bootstrap/dist/css/bootstrap.min.css";
 import firebase from "firebase/app";
 
-import AppNavbar from '../components/navbar';
-import {AuthWrapper, useAuthContext} from '../context/auth';
+import AppNavbar from "../components/navbar";
+import { AuthWrapper, useAuthContext } from "../context/auth";
+import styles from "../styles/Index.module.css";
 
 // Configure Firebase.
 const config = {
@@ -20,7 +21,7 @@ const config = {
   projectId: "hoohacks-21",
   storageBucket: "hoohacks-21.appspot.com",
   messagingSenderId: "610307618457",
-  appId: "1:610307618457:web:254783949497c06fcbea08"
+  appId: "1:610307618457:web:254783949497c06fcbea08",
 };
 
 if (!firebase.apps.length) {
@@ -30,11 +31,16 @@ if (!firebase.apps.length) {
 }
 
 function MyApp({ Component, pageProps }) {
-  return <AuthWrapper>
+  return (
+    <AuthWrapper>
       {/* <Navbar /> */}
-      <AppNavbar/>
+      <AppNavbar />
       <Component {...pageProps} />
-    </AuthWrapper> 
+      <footer className={styles.footer}>
+        © {new Date().getFullYear()} RealTalk
+      </footer>
+    </AuthWrapper>
+  );
 }
 
-export default MyApp
+export default MyApp;

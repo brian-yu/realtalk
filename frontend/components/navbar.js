@@ -14,7 +14,14 @@ export default function AppNavbar() {
   return (
     <Navbar className="bg-light justify-content-between" expand="lg">
       <Link href="/home">
-        <Navbar.Brand href="/home">RealTalk</Navbar.Brand>
+        <Navbar.Brand href="/home">
+        <img
+        alt=""
+        src="/logo.png"
+        width="30"
+        height="30"
+        className="d-inline-block align-top"
+      />{' '}RealTalk</Navbar.Brand>
       </Link>
 
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -33,9 +40,12 @@ export default function AppNavbar() {
         </Nav>
         <Nav className="ml-auto">
           <Nav.Item>
-            <Link href="/profile">
+            {/* <Link href="/profile">
               <Nav.Link href="/profile">Hi, {name}!</Nav.Link>
-            </Link>
+            </Link> */}
+            {/* <Nav.Link disabled>Hi, {name}!</Nav.Link> */}
+            <p className="text-center mt-2 mb-2 mr-2">Hi, {name}!</p>
+            {/* <p>Hi, {name}!</p> */}
           </Nav.Item>
           <Nav.Item>
             <Button
