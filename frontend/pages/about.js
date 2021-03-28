@@ -6,7 +6,7 @@ export default function About() {
     <div className={styles.container}>
       <Head>
         <title>RealTalk</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.svg" />
       </Head>
 
       <main className={styles.main}>

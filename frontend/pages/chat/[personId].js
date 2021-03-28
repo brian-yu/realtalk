@@ -151,7 +151,7 @@ export default function Chat() {
     <Container>
       <Head>
         <title>RealTalk | Chat with {person.name}</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.svg" />
       </Head>
 
       <h3>Chat with {person.name}</h3>
