@@ -1,11 +1,13 @@
 import base64
 import json
+import logging
 import os
 import subprocess
 import shutil
 import time
 import uuid
 
+import firebase_admin
 from firebase_admin import auth
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
@@ -17,6 +19,7 @@ import requests
 # firebase_admin.initialize_app(cred)
 
 openai.api_key = os.environ["OPENAI_API_KEY"]
+default_app = firebase_admin.initialize_app()
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -253,7 +256,7 @@ def chat():
             }
         )
     
-    uid = authenticate_id_token(id_token)
+    uid = authenticate_id_token(user_id_token)
     if uid != user_id:
         return jsonify(
             {
