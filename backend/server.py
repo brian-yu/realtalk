@@ -245,7 +245,7 @@ def chat():
     user_id = body["userId"]
     user_id_token = body["userIdToken"]
 
-    if len(message) > 300:
+    if len(message) > 140:
         return jsonify(
             {
                 "ok": False,

@@ -1,5 +1,1 @@
-
-
-
-
-export const BACKEND_HOST = "https://88c6e0e605ee.ngrok.io";
+export const BACKEND_HOST = process.env.NEXT_PUBLIC_BACKEND_HOST;
