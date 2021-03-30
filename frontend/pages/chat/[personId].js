@@ -2,6 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import {
+  Alert,
   Button,
   Container,
   Form,
@@ -155,11 +156,11 @@ export default function Chat() {
           e.target.src = person.video;
           e.target.loop = true;
         });
-        setMessage("");
-        setSendDisabled(false);
       } else {
         setError(data.message);
       }
+      setMessage("");
+      setSendDisabled(false);
     });
   };
 

@@ -4,6 +4,7 @@ import { useDropzone } from "react-dropzone";
 import { Alert, Button, Container, Form, Spinner } from "react-bootstrap";
 
 import { BACKEND_HOST } from "../lib/constants";
+import { useAuthContext } from "../context/auth";
 import { postData, postFormData, toBase64 } from "../lib/util";
 import styles from "../styles/Home.module.css";
 
@@ -85,6 +86,7 @@ function StyledDropzone({ setFile }) {
 }
 
 export default function Upload() {
+  const authState = useAuthContext();
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
   const [name, setName] = useState(null);
@@ -103,6 +105,8 @@ export default function Upload() {
     const formData = new FormData();
     formData.append("name", name);
     formData.append("bio", bio);
+    formData.append("userId", authState.uid);
+    formData.append("userIdToken", authState.idToken);
     formData.append("image", file);
 
     setLoading(true);
@@ -110,8 +114,12 @@ export default function Upload() {
       .then((data) => {
         console.log("Success:", data);
         setLoading(false);
-        setSuccess(true);
-        setError(false);
+
+        if (data.ok) {
+          setSuccess(true);
+        } else {
+          setError(data.message);
+        }
       })
       .catch((error) => {
         console.log(error);
@@ -169,9 +177,7 @@ export default function Upload() {
           <Button onClick={uploadData} disabled={loading}>
             Upload
           </Button>
-          {loading ? (
-              <Spinner animation="border" />
-          ) : null}
+          {loading ? <Spinner animation="border" /> : null}
         </Form>
       </Container>
     </div>

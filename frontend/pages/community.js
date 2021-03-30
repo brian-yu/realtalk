@@ -7,16 +7,15 @@ import { BACKEND_HOST } from "../lib/constants";
 import styles from "../styles/Home.module.css";
 
 export default function Community() {
-
   const [profiles, setProfiles] = useState([]);
 
   useEffect(() => {
     fetch(`${BACKEND_HOST}/profiles`)
-      .then(response => response.json())
-      .then(data => {
-        setProfiles(data)
+      .then((response) => response.json())
+      .then((data) => {
+        setProfiles(data);
       });
-  }, [])
+  }, []);
 
   return (
     <div className={styles.container}>
@@ -44,7 +43,12 @@ export default function Community() {
                   </div>
                   <Card.Body>
                     <Card.Title>{person.name}</Card.Title>
-                    <Card.Text>{person.bio}</Card.Text>
+                    <Card.Text>
+                      <p>{person.bio}</p>
+                      {person.uploaded_by ? (
+                        <p>Uploaded by {person.uploaded_by}</p>
+                      ) : null}
+                    </Card.Text>
                     <Link href={`/chat/${person.id}`}>
                       <Button variant="primary">
                         Chat with {person.name.split(" ")[0]}
