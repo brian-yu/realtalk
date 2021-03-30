@@ -1,5 +1,6 @@
 ## RealTalk
-
+![alt text](https://ibb.co/tQ470Dd)
+![alt text](https://ibb.co/xh8qSGW)
 # Inspiration
 Amazing recent advances in deep learning for computer vision, video processing, and natural language have led to increasingly realistic generation of fake faces, voices, and videos. We’re deeply interested in ML, and so we wanted to use some of these recent developments to build something that could engage and captivate people, while also providing potential utility for real world use.
 
