@@ -15,6 +15,7 @@ import {
 import { BACKEND_HOST } from "../../lib/constants";
 import { peopleMap } from "../../lib/people";
 import { postData } from "../../lib/util";
+import { useAuthContext } from "../../context/auth";
 import styles from "../../styles/Chat.module.css";
 
 function Message({ message }) {
@@ -66,6 +67,8 @@ export default function Chat() {
   const router = useRouter();
   const { personId } = router.query;
 
+  const authState = useAuthContext();
+
   useEffect(() => {
     if (!personId || peopleMap.hasOwnProperty(personId)) {
       return;
@@ -90,6 +93,7 @@ export default function Chat() {
   const [message, setMessage] = useState("");
   const [sendDisabled, setSendDisabled] = useState(false);
   const [voiceCloningEnabled, setVoiceCloningEnabled] = useState(false);
+  const [error, setError] = useState(null);
 
   const loading = sendDisabled;
 
@@ -129,7 +133,7 @@ export default function Chat() {
     if (sendDisabled) {
       return;
     }
-
+    setError(null);
     setSendDisabled(true);
     postData(`${BACKEND_HOST}/chat`, {
       message: message,
@@ -138,18 +142,24 @@ export default function Chat() {
       personId: personId,
       videoUrl: person.video,
       voiceCloningEnabled: voiceCloningEnabled,
+      userId: authState.uid,
+      userIdToken: authState.idToken,
     }).then((data) => {
-      setPrompt(data.prompt);
-      console.log(data.video);
-      videoRef.current.src = data.video;
-      videoRef.current.loop = false;
+      if (data.ok) {
+        setPrompt(data.prompt);
+        console.log(data.video);
+        videoRef.current.src = data.video;
+        videoRef.current.loop = false;
 
-      videoRef.current.addEventListener("ended", (e) => {
-        e.target.src = person.video;
-        e.target.loop = true;
-      });
-      setMessage("");
-      setSendDisabled(false);
+        videoRef.current.addEventListener("ended", (e) => {
+          e.target.src = person.video;
+          e.target.loop = true;
+        });
+        setMessage("");
+        setSendDisabled(false);
+      } else {
+        setError(data.message);
+      }
     });
   };
 
@@ -165,6 +175,7 @@ export default function Chat() {
       <div className={styles.container}>
         <div>
           <div className={styles.chatColumn}>
+            {!!error ? <Alert variant="danger">{error}</Alert> : null}
             <Log prompt={prompt} />
             <InputGroup className="mb-3">
               <FormControl
