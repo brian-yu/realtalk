@@ -2,4 +2,4 @@
 
 
 
-export const BACKEND_HOST = "https://3a27a6d63c7e.ngrok.io";
+export const BACKEND_HOST = "https://88c6e0e605ee.ngrok.io";
