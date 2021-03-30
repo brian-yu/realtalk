@@ -23,17 +23,17 @@ cors = CORS(app)
 # app.config["CORS_HEADERS"] = "Content-Type"
 
 ttsvoices = {
-    "franklin":"en-GB-Wavenet-A",
-    "obama":"en-US-Wavenet-J",
-    "feynman":"en-US-Wavenet-J",
-    "king":"en-US-Wavenet-J",
-    "curie":"fr-FR-Wavenet-A",
-    "harris":"en-US-Wavenet-F",
-    "einstein":"de-DE-Wavenet-E",
-    "lennon":"en-GB-Wavenet-B",
-    "earhart":"en-US-Wavenet-F",
-    "granger":"en-GB-Wavenet-A",
-    "bond":"en-GB-Wavenet-B",
+    "franklin": "en-GB-Wavenet-A",
+    "obama": "en-US-Wavenet-J",
+    "feynman": "en-US-Wavenet-J",
+    "king": "en-US-Wavenet-J",
+    "curie": "fr-FR-Wavenet-A",
+    "harris": "en-US-Wavenet-F",
+    "einstein": "de-DE-Wavenet-E",
+    "lennon": "en-GB-Wavenet-B",
+    "earhart": "en-US-Wavenet-F",
+    "granger": "en-GB-Wavenet-A",
+    "bond": "en-GB-Wavenet-B",
 }
 
 
@@ -153,7 +153,7 @@ def get_chat_completion(person, prompt, message):
         engine="davinci",
         prompt=prompt_with_message,
         temperature=0.5,
-        max_tokens=75, # formerly 150
+        max_tokens=75,  # formerly 150
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0.6,
@@ -172,17 +172,22 @@ def upload():
     name = request.form["name"]
     bio = request.form["bio"]
     image = request.files["image"]
-    # user_id = request.form["userId"]
-    # user_id_token = request.form["userIdToken"]
+    user_id = request.form["userId"]
+    user_id_token = request.form["userIdToken"]
 
-    # uid = authenticate_id_token(id_token)
-    # if uid != user_id:
-    #     return jsonify(
-    #         {
-    #             "ok": False,
-    #             "message": "Unauthenticated request. Please try signing in again.",
-    #         }
-    #     )
+    uid = authenticate_id_token(id_token)
+    if uid != user_id:
+        return jsonify(
+            {
+                "ok": False,
+                "message": "Unauthenticated request. Please try signing in again.",
+            }
+        )
+    user = get_user(uid)
+
+    print(
+        f"== UPLOAD FROM {uid}: {user.email} {user.display_name} name: {name} bio: {bio}"
+    )
 
     myuuid = str(uuid.uuid4())
     filename = myuuid + image.filename
@@ -203,6 +208,8 @@ def upload():
             "bio": bio,
             "video_url": "https://storage.googleapis.com/hoohacks21-user--uploads/"
             + blob_name,
+            "user_id": user_id,
+            "uploaded_by": user.display_name,
         }
     )
 
@@ -252,7 +259,7 @@ def chat():
                 "message": "Your message was too long. Please try a shorter one.",
             }
         )
-    
+
     uid = authenticate_id_token(id_token)
     if uid != user_id:
         return jsonify(
