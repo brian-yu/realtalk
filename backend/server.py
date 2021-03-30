@@ -23,15 +23,17 @@ cors = CORS(app)
 # app.config["CORS_HEADERS"] = "Content-Type"
 
 ttsvoices = {
-    "franklin": "en-GB-Wavenet-A",
-    "obama": "en-US-Wavenet-J",
-    "feynman": "en-US-Wavenet-J",
-    "king": "en-US-Wavenet-J",
-    "curie": "fr-FR-Wavenet-A",
-    "harris": "en-US-Wavenet-F",
-    "einstein": "de-DE-Wavenet-E",
-    "lennon": "en-GB-Wavenet-B",
-    "earhart": "en-US-Wavenet-F",
+    "franklin":"en-GB-Wavenet-A",
+    "obama":"en-US-Wavenet-J",
+    "feynman":"en-US-Wavenet-J",
+    "king":"en-US-Wavenet-J",
+    "curie":"fr-FR-Wavenet-A",
+    "harris":"en-US-Wavenet-F",
+    "einstein":"de-DE-Wavenet-E",
+    "lennon":"en-GB-Wavenet-B",
+    "earhart":"en-US-Wavenet-F",
+    "granger":"en-GB-Wavenet-A",
+    "bond":"en-GB-Wavenet-B",
 }
 
 
