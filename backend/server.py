@@ -153,7 +153,7 @@ def get_chat_completion(person, prompt, message):
         engine="davinci",
         prompt=prompt_with_message,
         temperature=0.5,
-        max_tokens=150,
+        max_tokens=75, # formerly 150
         top_p=1,
         frequency_penalty=0,
         presence_penalty=0.6,
