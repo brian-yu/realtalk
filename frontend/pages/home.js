@@ -28,6 +28,8 @@ export default function Home() {
                       loop
                       autoPlay={true}
                       muted
+                      playsInline
+                      webkit-playsinline="true"
                     />
                   </div>
                   <Card.Body>
