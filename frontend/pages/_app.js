@@ -9,10 +9,13 @@
 import "../styles/globals.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import firebase from "firebase/app";
+import ReactGA from "react-ga";
 
 import AppNavbar from "../components/navbar";
 import { AuthWrapper, useAuthContext } from "../context/auth";
 import styles from "../styles/Index.module.css";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 // Configure Firebase.
 const config = {
@@ -31,6 +34,24 @@ if (!firebase.apps.length) {
 }
 
 function MyApp({ Component, pageProps }) {
+  const router = useRouter();
+
+  const logAnalytics = (url) => {
+    ReactGA.pageview(url);
+  };
+
+  useEffect(() => {
+    ReactGA.initialize("G-3QVH242F6F");
+    logAnalytics(window.location.pathname + window.location.search);
+  }, []);
+
+  useEffect(() => {
+    router.events.on("routeChangeComplete", logAnalytics);
+    return () => {
+      router.events.off("routeChangeComplete", logAnalytics);
+    };
+  }, []);
+
   return (
     <AuthWrapper>
       {/* <Navbar /> */}
