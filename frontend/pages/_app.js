@@ -41,7 +41,7 @@ function MyApp({ Component, pageProps }) {
   };
 
   useEffect(() => {
-    ReactGA.initialize("G-3QVH242F6F");
+    ReactGA.initialize("UA-193524736-1");
     logAnalytics(window.location.pathname + window.location.search);
   }, []);
 
