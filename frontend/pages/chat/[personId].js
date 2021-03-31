@@ -205,6 +205,8 @@ export default function Chat() {
               height="512"
               loop
               autoPlay={true}
+              playsInline
+              webkit-playsinline="true"
             />
           </div>
           <OverlayTrigger placement="bottom" overlay={voiceCloningPopover}>
