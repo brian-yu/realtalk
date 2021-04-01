@@ -39,6 +39,8 @@ export default function Community() {
                       loop
                       autoPlay={true}
                       muted
+                      playsInline
+                      webkit-playsinline="true"
                     />
                   </div>
                   <Card.Body>
