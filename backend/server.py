@@ -11,14 +11,19 @@ import firebase_admin
 from firebase_admin import auth
 from flask import Flask, jsonify, request
 from flask_cors import CORS, cross_origin
-from google.cloud import texttospeech, storage, firestore
+from google.cloud import texttospeech, storage, firestore, secretmanager
 import openai
 import requests
 
 # cred = credentials.Certificate("hoohacks-21-49578c0b88ef.json")
 # firebase_admin.initialize_app(cred)
 
-openai.api_key = os.environ["OPENAI_API_KEY"]
+if "OPENAI_API_KEY" in os.environ:
+    openai.api_key = os.environ["OPENAI_API_KEY"]
+else:
+    secret_client = secretmanager.SecretManagerServiceClient()
+    secret_response = secret_client.access_secret_version(request={"name": "projects/hoohacks-21/secrets/openai/versions/latest"})
+    openai.api_key = secret_response.payload.data.decode("UTF-8")
 default_app = firebase_admin.initialize_app()
 
 app = Flask(__name__)
@@ -153,7 +158,7 @@ def get_chat_completion(person, prompt, message):
     print(prompt_with_message)
 
     response = openai.Completion.create(
-        engine="davinci",
+        engine="curie",
         prompt=prompt_with_message,
         temperature=0.5,
         max_tokens=75,  # formerly 150
@@ -178,7 +183,7 @@ def upload():
     user_id = request.form["userId"]
     user_id_token = request.form["userIdToken"]
 
-    uid = authenticate_id_token(id_token)
+    uid = authenticate_id_token(user_id_token)
     if uid != user_id:
         return jsonify(
             {
@@ -191,6 +196,14 @@ def upload():
     print(
         f"== UPLOAD FROM {uid}: {user.email} {user.display_name} name: {name} bio: {bio}"
     )
+
+    if user.email in {'jrm5qk@virginia.edu'}:
+        return jsonify(
+            {
+                "ok": False,
+                "message": "Stop spamming us. Check your email.",
+            }
+        )
 
     myuuid = str(uuid.uuid4())
     filename = myuuid + image.filename

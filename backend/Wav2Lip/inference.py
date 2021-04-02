@@ -405,7 +405,17 @@ def main():
         tqdm(gen, total=int(np.ceil(float(len(mel_chunks)) / batch_size)))
     ):
         if i == 0:
-            model = load_model(args.checkpoint_path)
+
+            try:
+                with open("model.pickle",'rb') as f:
+                    model =  pickle.load(f)
+                print("Loading Model Cache....")
+            except:
+                model = load_model(args.checkpoint_path)
+                with open("model.pickle", 'wb') as f:
+                    pickle.dump(model, f)
+                print("Saving Model Cache....")
+
             print("Model loaded")
 
             frame_h, frame_w = full_frames[0].shape[:-1]

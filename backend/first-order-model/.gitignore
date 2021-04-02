@@ -1,0 +1,4 @@
+*.pth.tar
+/.vscode
+__pycache__
+/venv
